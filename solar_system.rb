@@ -11,18 +11,20 @@ class SolarSystem
   def list
     summary = ""
     @planets.length.times { |i|
-      summary += "#{i + 1}. #{@planets[i]} \n"
+      summary += "#{i + 1}. #{@planets[i][:name]}: attrA - #{@planets[i][:attrA]}, attrB - #{@planets[i][:attrB]} \n"
     }
     return summary
   end
 
 end
 
-planet_list = ["Mercury", "Venus", "Earth", "Mars", "Jupiter"]
-my_solar_system = SolarSystem.new(planet_list)
+planet_a = { name: "Planet A", attrA: "A", attrB: "B" }
+planet_b = { name: "Planet B", attrA: "C", attrB: "D" }
+my_solar_system = SolarSystem.new( [ planet_a, planet_b ] )
 puts my_solar_system.list
 puts "==================="
-my_solar_system.add("Saturn")
-my_solar_system.add("Uranus")
-my_solar_system.add("Neptune")
+planet_c = { name: "Planet C", attrA: "E", attrB: "F" }
+planet_d = { name: "Planet D", attrA: "G", attrB: "H" }
+my_solar_system.add(planet_c)
+my_solar_system.add(planet_d)
 puts my_solar_system.list

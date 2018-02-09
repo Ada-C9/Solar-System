@@ -105,8 +105,12 @@ while user_choice.include?(planet_selection)
 end
 
 until user_choice.include?(planet_selection)
-  puts "\nInvalid entry. Try again.\n"
-  print "\nWhat would you like to do?"
+  puts "\nInvalid entry. Try again."
+  puts "\nListed are the planets surrounding the Black Hole Gargantua"
+  puts '1) Miller'
+  puts '2) Mann'
+  puts '3) Edmunds'
+  puts "\nWhich planet would you like to learn more about? (Enter the number associated with the planet)"
   planet_selection = gets.chomp.downcase
 
   case planet_selection

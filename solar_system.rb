@@ -1,9 +1,11 @@
 # Define class SolarSystem
 class SolarSystem
   attr_reader :planets
+  attr_reader :age
 
-  def initialize planet_list
+  def initialize planet_list, age
     @planets = planet_list
+    @age = age
   end
 
   def add new_planet
@@ -75,15 +77,17 @@ end
 new_planet_1 = Planet.new("Mercury", 88, 57909227, 4879, "3.30 x 10^23", 0)
 new_planet_2 = Planet.new("Venus", 225, 108209475, 12104, "4.87 x 10^24", 0)
 planets = [new_planet_1, new_planet_2]
-my_solar_system = SolarSystem.new(planets)
-puts my_solar_system.print_planet_list
+age_of_sun = 4600000000
+sun = SolarSystem.new(planets, age_of_sun)
+puts sun.print_planet_list
 
 # new_planet_3 = create_planet_by_user
 new_planet_3 = Planet.new("Earth", 365.24, 149598262, 12714, "5.97 x 10^24", 1)
-my_solar_system.add(new_planet_3)
-puts my_solar_system.print_planet_details
+sun.add(new_planet_3)
+puts sun.print_planet_details
 
 puts "Distance between #{new_planet_1.name} & #{new_planet_2.name} is #{new_planet_1.distance_from_another_planet(new_planet_2)} km."
+puts "The age of the current solar system is #{sun.age} earth years."
 
 # Information about solar system (sun)
 # mercury = Planet.new("Mercury", 88, 57909227, 4879, "3.30 x 10^23", 0)

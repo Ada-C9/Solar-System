@@ -44,6 +44,11 @@ class Planet
     info_message = "--#{@name}--\n\tyear length - #{@year_length} days\n\tdistance from the sun - #{@distance_from_the_sun} km\n\tdiameter - #{@diameter} km\n\tmass - #{@mass} kg\n\tmoons - #{@moons}"
     return info_message
   end
+
+  def distance_from_another_planet another_planet
+    distance = (@distance_from_the_sun - another_planet.distance_from_the_sun).abs
+    return distance
+  end
 end
 
 # Collect information of a new planet from the user
@@ -65,25 +70,22 @@ def create_planet_by_user
 end
 
 # Testing
-new_planet_1 = create_planet_by_user
-new_planet_2 = create_planet_by_user
+# new_planet_1 = create_planet_by_user
+# new_planet_2 = create_planet_by_user
+new_planet_1 = Planet.new("Mercury", 88, 57909227, 4879, "3.30 x 10^23", 0)
+new_planet_2 = Planet.new("Venus", 225, 108209475, 12104, "4.87 x 10^24", 0)
 planets = [new_planet_1, new_planet_2]
 my_solar_system = SolarSystem.new(planets)
 puts my_solar_system.print_planet_list
 
-new_planet_3 = create_planet_by_user
+# new_planet_3 = create_planet_by_user
+new_planet_3 = Planet.new("Earth", 365.24, 149598262, 12714, "5.97 x 10^24", 1)
 my_solar_system.add(new_planet_3)
 puts my_solar_system.print_planet_details
 
-# # Use hard-coded data for testing
+puts "Distance between #{new_planet_1.name} & #{new_planet_2.name} is #{new_planet_1.distance_from_another_planet(new_planet_2)} km."
+
+# Information about solar system (sun)
 # mercury = Planet.new("Mercury", 88, 57909227, 4879, "3.30 x 10^23", 0)
 # venus = Planet.new("Venus", 225, 108209475, 12104, "4.87 x 10^24", 0)
-# planets = [mercury, venus]
-# my_solar_system = SolarSystem.new(planets)
-# puts my_solar_system.print_planet_list
-# puts my_solar_system.print_planet_details
-#
 # earth = Planet.new("Earth", 365.24, 149598262, 12714, "5.97 x 10^24", 1)
-# my_solar_system.add(earth)
-# puts my_solar_system.print_planet_list
-# puts my_solar_system.print_planet_details

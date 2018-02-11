@@ -157,8 +157,7 @@ end
 # Planet class makes it possible to store information about a planet and print the corresponding details
 class Planet
 
-  attr_reader :name
-  attr_accessor :position, :radius, :mass, :gravity, :avg_temp, :distance_from_sun
+  attr_accessor :name :position, :radius, :mass, :gravity, :avg_temp, :distance_from_sun
 
   def initialize(facts_about_planet)
     @name = facts_about_planet[:name].capitalize

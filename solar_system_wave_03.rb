@@ -1,15 +1,15 @@
 class SolarSystem
 
-  def initialize(input_planets)
-    @planets = input_planets
+  def initialize(total_planets)
+    @planets = total_planets
   end
 
-  def input_planets
+  def total_planets
     return @planets
   end
 
   def summary
-    return "#{@planets}"
+    return "#{@planets} and whatever other details I may want to use for my solar system....moons, comets, asteroids, etc"
   end
 
 end
@@ -18,7 +18,9 @@ class Planet
 
   attr_accessor :name, :order, :type, :temperature, :random, :year_length, :distance_from_the_black_hole
 
+  # One argument for the planet which is the key of the planet with their respective value or symbols
   def initialize(describe_planet)
+    # each instance variable will take place of the symbol called outside the class
     @name = describe_planet[:name]
     @order = describe_planet[:order]
     @type = describe_planet[:type]
@@ -68,21 +70,24 @@ edmunds = {
 }
 puts "\nListed are the planets surrounding the Black Hole Gargantua"
 
-planets = [Planet.new(miller), Planet.new(mann), Planet.new(edmunds)
-]
+# Creating the first set of planets with hard code and storing them in the array 'planets'
 
-planets.each_with_index { |planet, i| puts "#{i + 1}. #{planet.name}"}
+planets = [Planet.new(miller), Planet.new(mann), Planet.new(edmunds)]
 
+# printing the planet index and value calling upon the name method in the Planet class
+planets.each_with_index {|planet, i| puts "#{i + 1}. #{planet.name}"}
 
+# Manually create as many planets as you want using a loop
 print "\nWould you like to create a planet: "
-
 create_planet_option = gets.chomp.downcase
 
 until create_planet_option == '2' || create_planet_option == 'no'
 
-  if create_planet_option == '1' || create_planet_option == 'yes'
+  case create_planet_option
+  when '1', 'yes'
     puts "\nPlease create a planet!"
 
+    # This will reflect the same type of info as the hardcoded data when manually entered
     create_planet = {}
 
     print "Planet Name: "
@@ -113,6 +118,7 @@ until create_planet_option == '2' || create_planet_option == 'no'
     distance_input = gets.chomp.downcase
     create_planet[:distance_from_the_black_hole] = distance_input
 
+    # Each planet created gets pushed to the planets  array
     planets << Planet.new(create_planet)
 
     print "\nWould you like to create a planet: "
@@ -125,28 +131,30 @@ until create_planet_option == '2' || create_planet_option == 'no'
     puts "2. No"
     print "\nWould you like to create a planet: "
     create_planet_option = gets.chomp.downcase
-
   end
 end
 
-p planets
-
+# Putting all the planets hard coded and manually created into the Gargantua Solar System array by calling upon the SolarSystem Class method
 gargantua_solar_system = SolarSystem.new([planets])
 # puts "\nHere is the array of the Solar System Gargantua with an array of some planets within:"
 # puts "\n#{gargantua_solar_system.summary}"
 
+# Updated List with the added planets to the hard coded ones
 puts "\nListed are the updated planets surrounding the Black Hole Gargantua"
-
-planet_selection = []
-
-planets.each_with_index {|planet, i| planet_selection << (i + 1).to_s}
 
 planets.each_with_index { |planet, i| puts "#{i + 1}. for #{planet.name}"}
 
 puts "#{planets.length + 1}. Exit"
 
+# Create array to convert to string
+planet_selection = []
+
+planets.each_with_index {|planet, i| planet_selection << (i + 1).to_s}
+
 puts "\nWhich planet would you like to learn more about? (Enter the number associated with the planet)"
 user_choice = gets.chomp.downcase
+
+# Another loop to learn about all planets hard coded and manually entered until the user 'exits' the program.
 
 until user_choice == "#{planets.length + 1}" || user_choice == 'exit'
 
@@ -173,6 +181,7 @@ until user_choice == "#{planets.length + 1}" || user_choice == 'exit'
   end
 end
 
+# END
 puts "\nThanks for checking out the Gargantua Universe! Try to not get sucked into the Black Hole!!"
 puts ""
 exit

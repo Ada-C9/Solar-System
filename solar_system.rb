@@ -28,7 +28,7 @@ class SolarSystem
     return planet_details
   end
 
-  def calculate_age ref_planet
+  def cal_age ref_planet
     return @age * 365.24 / ref_planet.yr_length
   end
 end
@@ -59,7 +59,7 @@ end
 
 # Generate a planet based on user's inputs
 def generate_planet
-  puts "Let's create a planet from scratch."
+  puts "\nLet's create a planet from scratch."
   print "Please enter its name first: "
   name = gets.chomp
   print "What's its diameter of this planet in km? "
@@ -76,7 +76,7 @@ def generate_planet
   return planet
 end
 
-# Existing data
+# Create instances of planets in the solar system
 mercury = Planet.new({"name" => "Mercury", "diameter" => 4879, "mass" => "3.30 x 10^23", "yr_length" => 88, "dis_from_sun" => 57909227, "moons" => 0})
 venus = Planet.new({"name" => "Venus", "diameter" => 12104, "mass" => "4.87 x 10^24", "yr_length" => 225, "dis_from_sun" => 108209475, "moons" => 0})
 earth = Planet.new({"name" => "Earth", "diameter" => 12714, "mass" => "5.97 x 10^24", "yr_length" => 365.24, "dis_from_sun" => 149598262, "moons" => 1})
@@ -88,11 +88,11 @@ neptune = Planet.new({"name" => "Neptune", "diameter" => 49528, "mass" => "1.02 
 planets = [mercury, venus, earth, mars, jupiter, saturn, uranus, neptune]
 sun = SolarSystem.new("Sun", 4600000000, planets)
 
-# Welcome
-puts "Welcome to the Solar System program. What would you like to do?\n1. Summary  2. Learn about planets  3. Add new planets  4. Fun numbers  5. Exit"
+# UI welcome message
+puts "\nWelcome to the Solar System program. What would you like to do?\n1. Summary  2. Learn about planets  3. Add a new planet  4. Do Math  5. Exit"
 
-# Helper method to validate user's choice
-def validate_choice(range)
+# Helper method to collect and validate user's choice
+def valid_choice(range)
   choice = gets.chomp.to_i
   until (1..range).include?(choice)
     print "Please enter a valid choice: "
@@ -101,47 +101,63 @@ def validate_choice(range)
   return choice
 end
 
-user_choice_1 = validate_choice(5)
-until user_choice_1 == 5
-  case user_choice_1
+# Helper method to print planet list
+def print_list(solar_system)
+  solar_system.planet_list.each_index do |i|
+    print "#{i + 1}. #{solar_system.planet_list[i]}  "
+  end
+end
+
+# Options
+choice_1 = valid_choice(5)
+until choice_1 == 5
+  case choice_1
+    # 1. Summary
     when 1
-      puts "================Summary================\nThe age of the sun is #{sun.age} years.\nCurrently, it has #{sun.planets.length} planets.\nHere is a brief summary of their properties:"
-      puts sun.planet_details
+      print "\nThe Sun (or Sol), is the star at the centre of our solar system and is responsible for the Earth’s climate and weather. The Sun is an almost perfect sphere with a difference of just 10km in diameter between the poles and the equator. The average radius of the Sun is 695,508 km (109.2 x that of the Earth) of which 20–25% is the core. There are #{sun.planets.length} planets in our system: "
+      print_list(sun)
+    # 2. Learn about planets
     when 2
       puts "\nPlease pick one planet from the following list:"
-      sun.planet_list.each_index { |i|
-        print "#{i + 1}. #{sun.planet_list[i]}  "
-      }
+      print_list(sun)
       puts "#{sun.planets.length + 1}. Exit\n"
-      user_choice_2 = validate_choice(sun.planet_list.length + 1)
-      until user_choice_2 == (sun.planets.length + 1)
-        puts sun.planet_details[user_choice_2 - 1]
-        puts "\nPlease feel free to pick another one if you want to learn more. Enter #{sun.planets.length + 1} to exit."
-        user_choice_2 = validate_choice(sun.planet_list.length + 1)
+
+      choice_2 = valid_choice(sun.planets.length + 1)
+      until choice_2 == (sun.planets.length + 1)
+        puts sun.planet_details[choice_2 - 1]
+        puts "\nPlease pick another one if you want to learn more. Enter #{sun.planets.length + 1} to exit."
+        choice_2 = valid_choice(sun.planet_list.length + 1)
       end
+    # 3. Add a new planet
     when 3
       new_planet = generate_planet
       sun.add(new_planet)
       puts "\nA new planet called #{new_planet.name} has been created and saved."
       puts "Here is a brief summary of its properties:"
       puts new_planet.info
+    # 4. Do Math
     when 4
       puts "\nLet's do Math!"
       puts "First, pick one planet from the following list:"
-      sun.planet_list.each_index { |i|
-        print "#{i + 1}. #{sun.planet_list[i]}  "
-      }
+      print_list(sun)
       puts "\n"
-      user_choice_3 = validate_choice(sun.planet_list.length)
-      ref_age = sun.calculate_age(sun.planets[user_choice_3 - 1])
-      puts "You picked #{sun.planets[user_choice_3 - 1].name}. We know that the solar system is #{sun.age} years old (in earth years). According to my secret calculator, this number will change to #{ref_age} if we adopt #{sun.planets[user_choice_3 - 1].name} years."
 
+      # Calculate age of sun based on reference planet
+      choice_3 = valid_choice(sun.planets.length)
+      if choice_3 != 3 # Order of Earth on the planet list
+        ref_age = sun.cal_age(sun.planets[choice_3 - 1])
+        puts "\nYou picked #{sun.planets[choice_3 - 1].name}!\nWe know that the solar system is #{sun.age} years old in earth years. This number will change to #{ref_age} if we adopt #{sun.planets[choice_3 - 1].name} years."
+      else
+        puts "\nYou picked #{sun.planets[choice_3 - 1].name}.\nThe solar system is #{sun.age} years old in earth years."
+      end
+
+      # Calculate distance between the two chosen planets
       puts "\nNow pick another planet from the list:"
-      user_choice_4 = validate_choice(sun.planet_list.length)
-      distance = sun.planets[user_choice_3 - 1].distance_from(sun.planets[user_choice_4 - 1])
-      puts "You picked #{sun.planets[user_choice_4 - 1].name}. Based on my secret calculator, the distance between #{sun.planets[user_choice_3 - 1].name} and #{sun.planets[user_choice_4 - 1].name} is #{distance} km."
+      choice_4 = valid_choice(sun.planets.length)
+      distance = sun.planets[choice_3 - 1].distance_from(sun.planets[choice_4 - 1])
+      puts "\nYou picked #{sun.planets[choice_4 - 1].name}!\nThe distance between #{sun.planets[choice_3 - 1].name} and #{sun.planets[choice_4 - 1].name} is #{distance} km."
   end
 
-  puts "\nWhat would you like to do next?\n1. Summary  2. Learn about planets  3. Add new planets  4. Fun numbers  5. Exit"
-  user_choice_1 = gets.chomp.to_i
+  puts "\n\nWhat would you like to do next?\n1. Summary  2. Learn about planets  3. Add a new planet  4. Do Math  5. Exit"
+  choice_1 = valid_choice(5)
 end

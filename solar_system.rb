@@ -101,7 +101,7 @@ def valid_choice(range)
   return choice
 end
 
-# Helper method to print planet list
+# Helper method to print out planet list
 def print_list(solar_system)
   solar_system.planet_list.each_index do |i|
     print "#{i + 1}. #{solar_system.planet_list[i]}  "
@@ -125,19 +125,19 @@ until choice_1 == 5
       choice_2 = valid_choice(sun.planets.length + 1)
       until choice_2 == (sun.planets.length + 1)
         puts sun.planet_details[choice_2 - 1]
-        puts "\nPlease pick another one if you want to learn more. Enter #{sun.planets.length + 1} to exit."
+        puts "\nPlease pick another one if you like. Enter #{sun.planets.length + 1} to exit."
         choice_2 = valid_choice(sun.planet_list.length + 1)
       end
     # 3. Add a new planet
     when 3
       new_planet = generate_planet
       sun.add(new_planet)
-      puts "\nA new planet called #{new_planet.name} has been created and saved."
-      puts "Here is a brief summary of its properties:"
+      puts "\nA new planet called #{new_planet.name} has been created by YOU and saved to our solar system! Go to \"Learn about planets\" to check out its profile."
+      puts "Below is a brief summary of its properties:"
       puts new_planet.info
     # 4. Do Math
     when 4
-      puts "\nLet's do Math!"
+      puts "\nLet's calculate some fun numbers!"
       puts "First, pick one planet from the following list:"
       print_list(sun)
       puts "\n"

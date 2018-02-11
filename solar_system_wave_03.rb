@@ -73,39 +73,63 @@ planets = [Planet.new(miller), Planet.new(mann), Planet.new(edmunds)
 
 planets.each_with_index { |planet, i| puts "#{i + 1}. #{planet.name}"}
 
-puts "\nPlease create a planet!"
 
-create_planet = {}
+print "\nWould you like to create a planet: "
 
-print "Planet Name: "
-name_input = gets.chomp.downcase
-create_planet[:name] = name_input
+create_planet_option = gets.chomp.downcase
 
-print "Order: "
-name_input = gets.chomp.downcase
-create_planet[:order] = name_input
+until create_planet_option == '2' || create_planet_option == 'no'
 
-print "Type: "
-type_input = gets.chomp.downcase
-create_planet[:type] = type_input
+  if create_planet_option == '1' || create_planet_option == 'yes'
+    puts "\nPlease create a planet!"
 
-print "Temperature: "
-temp_input = gets.chomp.downcase
-create_planet[:temperature] = temp_input
+    create_planet = {}
 
-print "Random Info: "
-random_input = gets.chomp.downcase
-create_planet[:random] = random_input
+    print "Planet Name: "
+    name_input = gets.chomp.downcase
+    create_planet[:name] = name_input
 
-print "Years to Revolve Around Black Hole: "
-years_input = gets.chomp.downcase
-create_planet[:year_length] = years_input
+    print "Order: "
+    name_input = gets.chomp.downcase
+    create_planet[:order] = name_input
 
-print "Distance From Black Hole (In Miles): "
-distance_input = gets.chomp.downcase
-create_planet[:distance_from_the_black_hole] = distance_input
+    print "Type: "
+    type_input = gets.chomp.downcase
+    create_planet[:type] = type_input
 
-planets << Planet.new(create_planet)
+    print "Temperature: "
+    temp_input = gets.chomp.downcase
+    create_planet[:temperature] = temp_input
+
+    print "Random Info: "
+    random_input = gets.chomp.downcase
+    create_planet[:random] = random_input
+
+    print "Years to Revolve Around Black Hole: "
+    years_input = gets.chomp.downcase
+    create_planet[:year_length] = years_input
+
+    print "Distance From Black Hole (In Miles): "
+    distance_input = gets.chomp.downcase
+    create_planet[:distance_from_the_black_hole] = distance_input
+
+    planets << Planet.new(create_planet)
+
+    print "\nWould you like to create a planet: "
+    create_planet_option = gets.chomp.downcase
+
+  else
+    puts "\nInvalid entry, please try again."
+    puts "\nPlease use: "
+    puts "1. Yes"
+    puts "2. No"
+    print "\nWould you like to create a planet: "
+    create_planet_option = gets.chomp.downcase
+
+  end
+end
+
+p planets
 
 gargantua_solar_system = SolarSystem.new([planets])
 # puts "\nHere is the array of the Solar System Gargantua with an array of some planets within:"
@@ -121,13 +145,10 @@ planets.each_with_index { |planet, i| puts "#{i + 1}. for #{planet.name}"}
 
 puts "#{planets.length + 1}. Exit"
 
-
 puts "\nWhich planet would you like to learn more about? (Enter the number associated with the planet)"
 user_choice = gets.chomp.downcase
 
-
-# while user_choice != 'exit'
-until user_choice == '5' || user_choice == 'exit'
+until user_choice == "#{planets.length + 1}" || user_choice == 'exit'
 
   if planet_selection.include?(user_choice)
 
@@ -141,7 +162,7 @@ until user_choice == '5' || user_choice == 'exit'
     puts "\nWhich planet would you like to learn more about? (Enter the number associated with the planet)"
     user_choice = gets.chomp.downcase
 
-    if user_choice == '5' || user_choice == 'exit'
+    if user_choice == "#{planets.length + 1}" || user_choice == 'exit'
       puts "\nThanks for checking out the Gargantua Universe! Try to not get sucked into the Black Hole!!"
       exit
     end

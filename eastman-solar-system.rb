@@ -27,8 +27,8 @@ class SolarSystem
 end
 
 class Planet
-  attr_accessor :name, :year_length, :distance_from_the_sun, :diameter, :mass, :mass_compared_to_earth, :moons, :surface_temp, :first_record, :recorded_by #reads and writes to instance variables for each planet
-
+  #changed to attr_reader to provide encapsulation and prevent user from changing planet information after creation
+  attr_reader :name, :year_length, :distance_from_the_sun, :diameter, :mass, :mass_compared_to_earth, :moons, :surface_temp, :first_record, :recorded_by
   def initialize(info) # initialize argument uses hash to populate instance variables
     @name = info[:name]
     @year_length = info[:year_length]
@@ -255,6 +255,5 @@ until new_planet == "no"
     puts "Would you like to learn more about another planet?"
     learn_more = gets.chomp.downcase
   end
-
   puts "-" * 20
   puts "Thank you for exploring the Solar System!\n - the program will exit now -"

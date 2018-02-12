@@ -18,10 +18,10 @@ class SolarSystem
 
 end
 
-planet_a = {name: "Mars", AttrA: "blah", AttrB: 45}
-planet_b = {name: "Test", AttrA: "hello", AttrB: 12}
-test_solarsystem = SolarSystem.new([planet_a, planet_b])
-test_solarsystem.list_planets_in_ss
+# planet_a = {name: "Mars", AttrA: "blah", AttrB: 45}
+# planet_b = {name: "Test", AttrA: "hello", AttrB: 12}
+# test_solarsystem = SolarSystem.new([planet_a, planet_b])
+# test_solarsystem.list_planets_in_ss
 
 ############### WAVE 2 ################
 class Planet

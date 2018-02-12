@@ -56,13 +56,6 @@ class SolarSystem
     @planets = planetsdata
   end
 
-  def matchplanet
-    @planets.each do |planeta|
-      if planeta.name == askedplanet
-        puts planeta.easytoread
-      end
-    end
-  end
   # Create a method that adds a planet to the list (not using user input).
   def addplanet=(new_planet)
     @planet = new_planet

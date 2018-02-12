@@ -68,7 +68,7 @@ class SolarSystem
     print "\nPlease type the number of your choice and hit enter: "
     chosen_planet = gets.chomp.to_i
     
-    until chosen_planet != 0
+    until chosen_planet > 0 && chosen_planet <= @planets.length
       print "Please enter either a valid number: "
       chosen_planet = gets.chomp.to_i
     end

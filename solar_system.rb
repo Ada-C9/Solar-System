@@ -39,8 +39,8 @@ class Planet
     return build_summary
   end
 
-  # If provided other_planet is a planet, returns the different in km between
-  # this planet and other_planet, with negative numbers indicated that this
+  # If provided other_planet is a planet, returns the difference in km between
+  # this planet and other_planet, with negative numbers indicating that this
   # planet is closer to the sun than other_planet, positive values
   # indicating that other_planet is closer to the sun than this planet, and zero
   # indicating they are equal distances from the sun.
@@ -68,7 +68,8 @@ class Planet
     return @distance_from_the_sun - other.distance_from_the_sun
   end
 
-  # Return
+  # Returns a more readable version of provided number depending on if number is
+  # a scientific number or a number over 1,000.
   def get_readable_number(number)
     return number.to_s.include?("e+") ? get_scientific_notation(number) :
       get_large_number(number)
@@ -99,14 +100,14 @@ end
 
 # ================================ SolarSystem =================================
 # This program creates a solar system of planets. This program also add
-# additional planets, return a known planet, gets a list of the planets, inform
-# if a planet is a known planet, return the number of known planets, get the
-# local year of a known planet, and set the age of the solar system.
+# additional planets, returns a known planet, gets a list of the planets,
+# informs if a planet is a known planet, return the number of known planets,
+# gets the local year of a known planet, and set the age of the solar system.
 #
 class SolarSystem
   attr_reader :age
 
-  # Provided initial_planets must be an Array of Planets
+  # Provided initial_planets must be an Array of Planets.
   # Returns a new SolarSystem with each planet from provided initial_planets.
   def initialize(initial_planets)
     @planets = []
@@ -198,7 +199,7 @@ class SolarSystem
     return @planets.find { |planet| planet.name.casecmp?(planet_name) }
   end
 
-  # Returns the local year of provided planet_name
+  # Returns the local year of provided planet_name.
   def calculate_local_year(planet_name)
     return @age / get_planet_if_known(planet_name).year
   end
@@ -251,8 +252,7 @@ def convert_km_to_au(distance_in_km)
 end
 
 # Prints the provided start_char, a dash for each astronomical units (AU) of the
-# provided distance_in_km, and prints the end_char
-# is from Earth, and as rocket ship.
+# provided distance_in_km, and prints the end_char.
 def spaceship_journey(distance_in_km, start_char, end_char)
   distance_in_au = convert_km_to_au(distance_in_km)
   print "#{start_char}"
@@ -264,7 +264,7 @@ def spaceship_journey(distance_in_km, start_char, end_char)
 end
 
 # Calls a simulation of a trip from provided current_planet to provided
-# next_planet .
+# next_planet.
 def set_up_space_journey(next_planet, current_planet)
   start_planet_emoji = current_planet.name == "Earth" ? "🌎" : "🌐"
   distance_to_travel = current_planet.compare_to_distance(next_planet)
@@ -382,10 +382,10 @@ loop do
   planet_name = prompt_and_get_planet_name  # program exits if user enters 'exit'
   if planet_name.downcase == "add"
     dwarf_planets.add_planet(get_new_planet)
-  elsif !dwarf_planets.has_planet?(planet_name)
+  elsif !dwarf_planets.has_planet?(planet_name) # if not a known planet
     redo if !add_new_planet?(planet_name) # if user does not want to add planet
-    dwarf_planets.add_planet(get_new_named_planet(planet_name))
-  else
+    dwarf_planets.add_planet(get_new_named_planet(planet_name)) # adds planet
+  else  # known planet
     next_planet = dwarf_planets.get_planet(planet_name)
     print_planet_info(next_planet, current_planet)
     current_planet = next_planet

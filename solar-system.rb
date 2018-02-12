@@ -1,5 +1,4 @@
 
-require "pry"
 ##################### WAVE 1 PART 1 #####################
 #
 # class SolarSystem
@@ -179,10 +178,6 @@ class SolarSystem
 
   def initialize(input_planets)
     @planets = input_planets
-
-    # ## optional
-    # one_instance_of_a_planet = @planets[0]
-    # one_instance_of_a_planet.print_out
   end
 
   def summary
@@ -219,17 +214,17 @@ class Planet
     @primary_export = primary_export
   end
 
-  #method prints out all info about given planet:
+  # method prints out all info about given planet:
   def print_out
     return "\n✳︎ #{@name.upcase} ✳︎\n" +
    " ⭐︎ #{@name} is #{@distance_from_core} light years away from core.\n" +
    " ⭐︎ The native species of #{@name} are #{@native_species}.\n" +
    " ⭐︎ #{@name} has #{@moons} moons.\n" +
    " ⭐︎ #{@name}'s primary export: #{@primary_export}.\n"
-    end
+  end
 
 end
-#end of Planet Class
+# end of Planet Class
 
 # method to get user input to create a new planets
 
@@ -256,7 +251,7 @@ def create_planet
 end
 
 
-#Method to choose planet to learn about
+# method to choose planet to learn about
 
 def user_interface(solar_system)
   puts "⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎Welcome to a Star Wars Solar System⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎⭐︎\n\n"
@@ -307,7 +302,7 @@ planet_array = [
   Planet.new("Coruscant", 10000, "Humans/Zhell", 4,"None - governing body"),
   Planet.new("Jakku", 240000, "Teedus", 1, "Bezorite & junk metal"),
   Planet.new("Hoth", 50200, "Skels", 3, "Ice")
-]
+  ]
 
 
 star_wars_solar_system = SolarSystem.new(planet_array)

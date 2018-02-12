@@ -30,10 +30,10 @@ end
 
 class Planet
 
-  attr_reader :name
-  attr_reader :order
-  attr_reader :radius
-  attr_reader :moons
+  attr_accessor :name
+  attr_accessor :order
+  attr_accessor :radius
+  attr_accessor :moons
 
   def initialize(name, order, radius, moons)
     @name = name

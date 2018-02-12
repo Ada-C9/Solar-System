@@ -152,7 +152,7 @@ planets_array =
       new_planet_distance = gets.chomp
       new_planet_distance = validate_numbers(new_planet_distance)
 
-      print "Planet's planet_type: "
+      print "Planet's planet type: "
       new_planet_type = gets.chomp
       new_planet_type = validate_strings(new_planet_type)
 
@@ -324,7 +324,7 @@ end
 # Validation method for strings inputs from users:
 def validate_strings(string_input)
   while string_input == ""
-    puts "Your new planet needs a name...."
+    puts "Your new planet needs this information...."
     print "Please enter a valid information.  "
     string_input = gets.chomp
   end
@@ -336,7 +336,7 @@ end
 
 # -------------
 # Validation Method for numbers:
-def validate_numbers (user_number_input)
+def validate_numbers(user_number_input)
   while user_number_input.match?(/\D/) && !(user_number_input.match?(/\d\.\d/)) || user_number_input == ""
 
     if user_number_input == "exit"

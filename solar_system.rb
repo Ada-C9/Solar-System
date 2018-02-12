@@ -123,7 +123,7 @@ end
 # the list of planets will be updated if the user creates a planet before.
 def again(system_)
 
-  print "\nWould you like to continue?: "
+  print "\nWould you like to continue? Enter Y for yes and N for no:: "
   user_input2 = gets.chomp.upcase
 
   case user_input2

@@ -22,6 +22,9 @@ class SolarSystem
     return @planets
   end
 
+  def planet
+    puts
+  end
   arr_planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
 
   @planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
@@ -59,16 +62,15 @@ class Planet
     return @summary
   end
 
-
-  mercury = Planet.new("Mercury", 1, 2440  , 0)
-  venus = Planet.new("Venus", 2, 6052 , 0)
-  earth = Planet.new("Earth", 3, 6371 ,1)
-
-    puts
-    puts mercury.summary
-    puts venus.summary
-    puts earth.summary
-    puts
-
 end
 
+  planet_arr = [
+    Planet.new("Mercury", 1, 2440  , 0),
+    Planet.new("Venus", 2, 6052 , 0),
+    Planet.new("Earth", 3, 6371 ,1)
+  ]
+
+puts
+planet_arr.each do |i|
+  puts i.summary
+end

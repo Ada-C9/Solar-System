@@ -67,11 +67,16 @@ class SolarSystem
 
     print "\nPlease type the number of your choice and hit enter: "
     chosen_planet = gets.chomp.to_i
+    
+    until chosen_planet != 0
+      print "Please enter either a valid number: "
+      chosen_planet = gets.chomp.to_i
+    end
 
     @planets.each_with_index do |planet, i|
       if chosen_planet-1 == i
         puts "\nMore information on " + planet.name + ":"
-        puts "Greek name: " + planet.gname + "\nNumber of moons: " + planet.moon.to_s + "\nDistance from the sun: " + planet.au.to_s + "A.U.\n "
+        puts "Greek name: " + planet.gname + "\nNumber of moons: " + planet.moon.to_s + "\nDistance from the sun: " + planet.au.to_s + " A.U.\n "
       end
     end
     puts "Hmmm...would you like to do more?"

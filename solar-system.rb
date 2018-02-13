@@ -14,16 +14,6 @@ class SolarSystem
     @planets << planet_to_add
   end
 
-  # Create an array of planet names
-  # def planet_name_array
-  #   @planet_names = []
-  #   @planets.each do |planet_object|
-  #     planet_name = planet_object.name.downcase
-  #     @planet_names << planet_name
-  #     end
-  #   @planet_names
-  # end
-
   # Generates a list of planet names
   def list_planets
     planet_list = ''
@@ -32,7 +22,7 @@ class SolarSystem
       i += 1
       planet_list << "#{i}. #{planet.name.capitalize}\n"
     end
-    return planet_list
+    planet_list
   end
 
   # This method finds the distance assuming they are in a straight line out from the sun.
@@ -43,7 +33,7 @@ class SolarSystem
     distance = @planets[planet_1.to_i].distance_from_sun - @planets[planet_2.to_i].distance_from_sun
     information_hash[:distance] = distance.abs
 
-    return information_hash
+    information_hash
   end
 end # End of Solar System class
 
@@ -65,7 +55,7 @@ class Planet
     Color: #{@color}
     Length of Year (in Earth years): #{@year_length}
     Distance from the sun: #{@distance_from_sun} million km"
-    return planet_summary
+    planet_summary
   end
 end # End of Planet class
 
@@ -77,7 +67,7 @@ def get_choice
   (C) Exit the program"
   print "\nPlease select a letter: "
   choice = gets.chomp.upcase
-  return choice
+  choice
 end
 
 # If the user enters a planet name the first time, it will be accepted. If the user does not enter a correct number or name it will prompt them to enter an existing number until they do.
@@ -85,14 +75,13 @@ def valid_entry(solar_system)
   print 'Select a planet: '
   planet_number = gets.chomp
 
-
   # If user does not enter a valid name or number they will be prompted to enter again.
   until (planet_number.to_i.to_s == planet_number) && (planet_number.to_i <= solar_system.planets.length && planet_number.to_i > 0)
     print 'Please select a valid number to represent a planet: '
     planet_number = gets.chomp
   end
   planet_number = planet_number.to_i - 1
-  return planet_number
+  planet_number
 end
 
 # (Choice A)
@@ -103,7 +92,7 @@ def create_new_planet
     puts 'Please enter the name of the planet you would like to add: '
     planet[:name] = gets.chomp.capitalize
   end
-  puts "Please provide the following attributes."
+  puts 'Please provide the following attributes.'
   print 'Diameter(in km): '
   planet[:diameter] = gets.chomp
   print "Distance from the Sun (or it's star) (units: million km): "
@@ -114,7 +103,7 @@ def create_new_planet
   planet[:color] = gets.chomp
 
   planet_object = Planet.new(planet)
-  return planet_object
+  planet_object
 end
 
 # (Choice B)
@@ -191,7 +180,7 @@ end
 solar_system_object = SolarSystem.new(solar_system_planets)
 
 # User interface
-while true
+loop do
   choice = get_choice
   case choice
   when 'A'
